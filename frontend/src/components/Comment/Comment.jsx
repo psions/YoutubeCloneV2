@@ -17,7 +17,7 @@ const Comment = (props) => {
 
   async function getVideoComment(videoId) {
     let response = await axios.get(
-      `http://127.0.0.1:8000/comments/${videoId}/`
+      `http://127.0.0.1:8000/api/comments/${videoId}/`
     );
     setComments(response.data);
   }

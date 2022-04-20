@@ -1,13 +1,16 @@
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import jwt_decode from "jwt-decode";
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home/Home.jsx";
 import LoginForm from "./components/LoginForm/LoginForm.jsx";
 import NavBar from "./components/NavBar/NavBar.jsx";
 import RegistrationForm from "./components/RegistatrationForm/RegistrationForm";
+import MatrialUi from "./ui/MaterialUi";
+import LeftBar from "./leftbar/LeftBar";
+
 
 function App() {
   // const [videoTitle, setVideoTitle] = useState("");
@@ -40,47 +43,54 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <NavBar search={search} setSearch={setSearch} getVideo={getVideo} />
-      <Routes>
-        <Route
-          exact
-          path="/"
-          element={
-            
-            <Home
-              storedUserName={storedUserName}
-              user={user}
-              setUser={setUser}
-              videoId={currentVideoId}
-              setVideoId={setVideoId}
+    <Fragment className='container-fluid'>
+      <MatrialUi/>
+      <LeftBar/>
+      
+      
+      <div className="App">
+        <NavBar search={search} setSearch={setSearch} getVideo={getVideo} />
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
               
-            />
-          }
-         />
-        {/* <Route
-          path="home"
-          element={() => {
-            if (!user) {
-              return <LoginForm />;
-            } else {
-              return <Home user={user} />;
+              <Home
+                storedUserName={storedUserName}
+                user={user}
+                setUser={setUser}
+                videoId={currentVideoId}
+                setVideoId={setVideoId}
+                
+              />
             }
-          }}
-        /> */}
-        <Route
-          path="login/*"
-          element={
-            <LoginForm user={user} setStoredUserName={setStoredUserName} />
-          }
-        />
-        <Route
-          exact
-          path="loginform/registration"
-          element={<RegistrationForm />}
-        />
-      </Routes>
-    </div>
+          />
+          {/* <Route
+            path="home"
+            element={() => {
+              if (!user) {
+                return <LoginForm />;
+              } else {
+                return <Home user={user} />;
+              }
+            }}
+          /> */}
+          <Route
+            path="login/*"
+            element={
+              <LoginForm user={user} setStoredUserName={setStoredUserName} />
+            }
+          />
+          <Route
+            exact
+            path="loginform/registration"
+            element={<RegistrationForm />}
+          />
+        </Routes>
+      </div>
+      
+    </Fragment>
   );
 }
 
