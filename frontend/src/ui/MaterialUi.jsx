@@ -15,10 +15,10 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '40px'
     },
     cardGrid: {
-        padding: '20px 0'
+        padding: '50px 0'
     },
     card: {
-        height: '200%',
+        height: '300%',
         display: 'flex',
         flexDirection: 'column'
     },
@@ -83,18 +83,18 @@ const MatrialUi = () => {
                         <Grid item key={card} xs={12} sm={6} md={4}>
                             <Card className={classes.card}>
                                 <CardMedia 
-                                    component="img"
+                                    component="iframe"
                                     className={classes.CardMedia}
-                                    image="https://source.unsplash.com/random"
+                                    image="https://www.youtuberandom.com/"
                                     title="Image title"
                                     alt="random image"
                                 />
                                 <CardContent className={classes.cardContent}>
                                     <Typography gutterBottom variant="h5">
-                                        Heading
+                                        put in leave a comment button
                                     </Typography>
                                     <Typography>
-                                        This is a media card, use this area to describe content
+                                    this is where the comment section will be
                                     </Typography>
                                 </CardContent>
                                 <CardActions>

@@ -9,7 +9,8 @@ import LoginForm from "./components/LoginForm/LoginForm.jsx";
 import NavBar from "./components/NavBar/NavBar.jsx";
 import RegistrationForm from "./components/RegistatrationForm/RegistrationForm";
 import MatrialUi from "./ui/MaterialUi";
-import LeftBar from "./leftbar/LeftBar";
+import './leftbar/LeftBar.css';
+
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
   const [search, setSearch] = useState("");
   const [storedUserName, setStoredUserName] = useState("");
   const APIKEY = "AIzaSyBX7Unp0G6opzW7hJ3wWBp85ysQaslVrsI";
-
+  
   useEffect(() => {
     const jwt = localStorage.getItem("token");
 
@@ -41,21 +42,23 @@ function App() {
       console.log("Error in getVideo call: ", err);
     }
   }
-
+  
   return (
     <Fragment className='container-fluid'>
-      <MatrialUi/>
-      <LeftBar/>
       
+      <MatrialUi/>
+      <leftbar/>
+             
       
       <div className="App">
+       
         <NavBar search={search} setSearch={setSearch} getVideo={getVideo} />
         <Routes>
           <Route
             exact
             path="/"
             element={
-              
+               
               <Home
                 storedUserName={storedUserName}
                 user={user}
@@ -87,11 +90,13 @@ function App() {
             path="loginform/registration"
             element={<RegistrationForm />}
           />
+      
         </Routes>
       </div>
+      
       
     </Fragment>
   );
 }
-
+  
 export default App;

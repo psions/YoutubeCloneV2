@@ -7,13 +7,13 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(8, 0, 6)
     },
     icon: {
-        marginRight: '20px',
+        marginRight: '40px',
     },
     buttons:{
         marginTop: '40px'
     },
     cardGrid: {
-        padding: '20px 0'
+        padding: '30px 0'
     },
     card: {
         height: '200%',
