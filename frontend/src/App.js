@@ -10,13 +10,15 @@ import NavBar from "./components/NavBar/NavBar.jsx";
 import RegistrationForm from "./components/RegistatrationForm/RegistrationForm";
 import MatrialUi from "./ui/MaterialUi";
 import './leftbar/LeftBar.css';
-
-
+import VideoPlayer from "./components/VideoPlayer/VideoPlayer";
+import SearchBar from "./components/SearchBar/SearchBar";
 
 function App() {
   // const [videoTitle, setVideoTitle] = useState("");
   const [user, setUser] = useState(null);
-  const [currentVideoId, setVideoId] = useState("");
+  const [videoId, setVideoId] = useState("");
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [search, setSearch] = useState("");
   const [storedUserName, setStoredUserName] = useState("");
   const APIKEY = "AIzaSyBX7Unp0G6opzW7hJ3wWBp85ysQaslVrsI";
@@ -28,28 +30,28 @@ function App() {
       const decodedUser = jwt_decode(jwt);
       setUser(decodedUser);
     } catch {}
-    getVideo("castles");
+    getVideo();
   }, []);
 
-  async function getVideo(request) {
+  async function getVideo(request = "music") {
     try {
       let response = await axios.get(
-        `https://www.googleapis.com/youtube/v3/search?q=${request}&key=${APIKEY}`
+        `https://www.googleapis.com/youtube/v3/search?q=${request}&key=${APIKEY}&part=snippet`
       );
-      console.log("getVideo function response data", response.data);
+      console.log("getVideo function response data: ", response.data);
       setVideoId(response.data.items[0].id.videoId);
+      setTitle(response.data.items[0].snippet.title);
+      setDescription(response.data.items[0].snippet.description);
     } catch (err) {
       console.log("Error in getVideo call: ", err);
     }
   }
   
-  return (
+   return (
     <Fragment className='container-fluid'>
-      
-      <MatrialUi/>
       <leftbar/>
-             
-      
+      <SearchBar getVideo={getVideo}/>       
+      <VideoPlayer videoId = {videoId} title={title} description = {description}/>
       <div className="App">
        
         <NavBar search={search} setSearch={setSearch} getVideo={getVideo} />
@@ -63,7 +65,7 @@ function App() {
                 storedUserName={storedUserName}
                 user={user}
                 setUser={setUser}
-                videoId={currentVideoId}
+                videoId={videoId}
                 setVideoId={setVideoId}
                 
               />

@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Button, Form, FormControl } from "react-bootstrap";
 
 const SearchBar = (props) => {
+  const [searchTerm, setSearchTerm]=useState('');
   function handleSubmit(event) {
-    event.preventDefault();
-    console.log(props.search);
-    props.getVideo();
-    props.setSearch("");
+    event.preventDefault()
+    debugger
+    props.getVideo(searchTerm)
   }
 
   return (
@@ -14,8 +14,7 @@ const SearchBar = (props) => {
       <FormControl
         className="me-2"
         type="search"
-        value={props.search}
-        onChange={(event) => props.setSearch(event.target.value)}
+        onChange={(event) => setSearchTerm(event.target.value)}
       />
       <Button type="submit">Search</Button>
     </Form>

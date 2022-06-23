@@ -10,7 +10,7 @@ const RelatedVideos = (props) => {
     console.log("Called successfully");
     if (props.videoId) {
       let response = await axios.get(
-        `www.googleapis.com/youtube/v3/search?relatedToVideoId={${request}}&type=video&key={${APIKEY}}`
+        `https://www.googleapis.com/youtube/v3/search?relatedToVideoId={${props.videoId}}&type=video&key={${APIKEY}}&part=snippet`
       );
       setListRelatedVideos(response.data.items);
       console.log("video list", response.data.items);
@@ -20,11 +20,7 @@ const RelatedVideos = (props) => {
   }
 
   useEffect(() => {
-    let mounted = true;
-    if (mounted) {
-      getRelatedVideos();
-    }
-    return () => (mounted = false);
+    getRelatedVideos()
   }, [props.videoId]);
 
   function handleSubmit(videoId) {
